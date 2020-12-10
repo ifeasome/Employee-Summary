@@ -1,1 +1,3 @@
-# Employee-Summary-
+# Employee-Summary-Template-Engine
+
+  A Node CLI that takes in information about employees and generates an HTML webpage that displays summaries for each person. Unit tests written and passed for each defined class. 
