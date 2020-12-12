@@ -15,7 +15,7 @@
 
 
   ## Description
-  A Node CLI that takes in information about employees and generates an HTML webpage that displays summaries for each person. Unit tests written and passed for each defined class. The following packages are required to run this appliction: 
+ A Node CLI that takes in information about employees and generates an HTML webpage that displays summaries for each person. Unit tests written and passed for each defined class. The following packages are required to run this appliction: 
 
    [Inquirer package](https://www.npmjs.com/package/inquirer). </br>
    [Jest package](https://jestjs.io/)
@@ -27,7 +27,7 @@
    node app.js
    ```
 
-   > Make sure to naviagte to `./Develop` folder located in the first level of the repository.
+   > Make sure to navigate to `./Develop` folder located in the first level of the repository.
 
 
   ## Installation 
