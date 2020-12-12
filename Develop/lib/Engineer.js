@@ -12,7 +12,7 @@
      }
 
      getGithub() {
-         return "GitHubUser";
+         return this.github;
      }
  }
 

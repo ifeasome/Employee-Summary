@@ -12,7 +12,7 @@ class Intern extends Employee {
     }
 
     getSchool() {
-        return "UCLA";
+        return this.school;
     }
 }
 
