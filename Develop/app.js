@@ -14,48 +14,81 @@ const Employee = require("./lib/Employee");
 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
-const questions = () => inquirer.prompt([
-    {
-        type: "input",
-        name: "memberAdd",
-        message: "Do you want to add a new team Member?",
-    },
-    {
-        type: "input",
-        name: "name",
-        message: "Enter employee name:",
-        when: (answers) => answers.memberAdd === true,
-     },
-    {
-        type: "list",
-        name: "role",
-        message: "Select employee type",
-        choices: ["Engineer", "Intern", "Manager"],
-    },
-    {
-        type: "input",
-        name: "email",
-        message: "Enter email address of employee",
-        
-    },
-    {
-        type: "input",
-        name: "id",
-        message: "What is the employee's ID?",
-    },
-    {
-        type: "input",
-        name: "github",
-        message: "Employee github username, please?",
-        when: (answers) => answers.role === "Engineer",
-    },
-    {
-        type: "input",
-        name: "school",
-        message: "Name of school?",
-        when: (answers) => answers.role === "Intern",
-    },
-]);
+const employees = [];
+
+function teamGenerator() {
+    inquirer
+      .prompt([
+        {
+          message: "Enter member's name",
+          name: "name",
+        },
+        {
+          type: "list",
+          message: "Select team member's role",
+          choices: ["Engineer", "Intern", "Manager"],
+          name: "role",
+        },
+        {
+          message: "Enter member's ID",
+          name: "id",
+        },
+        {
+          message: "Enter member's email",
+          name: "email",
+        },
+      ])
+      .then(function ({ name, role, id, email }) {
+        let roleInput = "";
+        if (role === "Engineer") {
+          roleInput = "GitHub Username";
+        } else if (role === "Intern") {
+          roleInput = "School Name";
+        } else {
+          roleInput = "Office Number";
+        }
+        inquirer
+          .prompt([
+            {
+              message: `What is member's ${roleInput}?`,
+              name: "roleInput",
+            },
+            {
+              type: "confirm",
+              message: "Add more members?",
+              name: "addMembers",
+            },
+          ])
+          .then(function ({ roleInput, addMembers }) {
+            let teamMember;
+            if (role === "Engineer") {
+              teamMember = new Engineer(name, id, email, roleInput);
+            } else if (role === "Intern") {
+              teamMember = new Intern(name, id, email, roleInput);
+            } else {
+              teamMember = new Manager(name, id, email, roleInput);
+            }
+            employees.push(teamMember);
+            if (addMembers) {
+              teamGenerator();
+            } else {
+              render(employees);
+              fs.writeFile(outputPath, render(employees), (err) => {
+                if (err) {
+                  throw err;
+                }
+                console.log("Member(s) added!");
+              });
+            }
+          })
+          .catch((err) => {
+            if (err) {
+              console.log("Error: ", err);
+            }
+          });
+      });
+  }
+  teamGenerator();
 
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
