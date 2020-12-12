@@ -54,7 +54,7 @@
   
 
   ## Credits 
-  Credit to: 
+  Credit to: </br>
    [Demetri Dillard](https://github.com/Meechlouch) for walking me through tough areas in the application. </br>
    [Nathan Larson](https://github.com/ironicminer) for input on file paths. </br>
    [Kristina Hamilton](https://github.com/Kay0s) for helpful insights during study group. 
